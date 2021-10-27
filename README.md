@@ -46,11 +46,11 @@ os.subtitle({
 ```js
 os.download({
   file_id: '2800'
-  }).then((response) => {
-    /* response {
-      link: <URL TO THE REQUESTED FILE>
-    }*/
-  }).catch(console.error)
+}).then((response) => {
+  /* response {
+    link: <URL TO THE REQUESTED FILE>
+  }*/
+}).catch(console.error)
 ```
 
 ## License
