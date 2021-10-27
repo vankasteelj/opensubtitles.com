@@ -1,26 +1,26 @@
 {
-  "name": "opensubtitles.com",
-  "version": "0.0.1-beta",
-  "description": "thetvdb.com api wrapper",
-  "author": {
-      "name": "vankasteelj",
-      "email": "vankasteelj@gmail.com"
-  },
-  "main": "opensubtitles.js",
-  "license": "MIT",
-  "keywords": [
-      "opensubtitles",
-      "opensubtitles.com",
-      "subtitles",
-      "srt",
-      "api",
-      "wrapper"
-  ],
-  "repository": {
-      "type": "git",
-      "url": "https://github.com/vankasteelj/opensubtitles.com.git"
-  },
-  "dependencies": {
-      "got": "^11.8.2"
-  }
+    "name": "opensubtitles.com",
+    "version": "0.0.1-beta",
+    "description": "thetvdb.com api wrapper",
+    "author": {
+        "name": "vankasteelj",
+        "email": "vankasteelj@gmail.com"
+    },
+    "main": "opensubtitles.js",
+    "license": "MIT",
+    "keywords": [
+        "opensubtitles",
+        "opensubtitles.com",
+        "subtitles",
+        "srt",
+        "api",
+        "wrapper"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/vankasteelj/opensubtitles.com.git"
+    },
+    "dependencies": {
+        "got": "^11.8.2"
+    }
 }

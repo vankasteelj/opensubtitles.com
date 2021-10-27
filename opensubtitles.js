@@ -10,10 +10,34 @@ module.exports = class OS {
     this._authentication = {}
     this._settings = {
       apikey: settings.apikey,
-      endpoint: 'https://api.opensubtitles.com'
+      endpoint: 'https://api.opensubtitles.com',
+      headers: {'Content-Type': 'application/json'}
     }
 
     this._construct()
+  }
+
+  login(auth) {
+    if (!auth.username || !auth.password) {
+      throw Error('requires a username and a password')
+    }
+
+    return this.user.login(auth).then((response) => {
+      this._authentication.user = response.user
+      this._authentication.token = response.token
+      return response
+    })
+  }
+
+  logout() {
+    if (!this._authentication.token) {
+      throw Error('not logged in')
+    }
+
+    return this.user.logout().then((response) => {
+      this._authentication = {} //reset
+      return response
+    })
   }
 
   // Creates methods for all requests
@@ -38,8 +62,6 @@ module.exports = class OS {
 
   // Parse url before api call
   _parse(method, params = {}) {
-    if (!this._authentication.token) throw Error('requires a bearer token, login first')
-
     let url = this._settings.endpoint + method.url.split('?')[0]
 
     // ?Part
@@ -59,42 +81,38 @@ module.exports = class OS {
   }
 
   // Parse methods then hit API
-  _call(method, params) {
-    return () => {
-      const url = this._parse(method, params)
-      let req = {method: method.method}
+  _call(method, params = {}) {
+    const url = this._parse(method, params)
+    let req = {
+      method: method.method,
+      headers: this._settings.headers
+    }
 
-      // HEADERS Content-Type
-      if (req.method === 'POST') {
-        req.headers = {'Content-Type': 'multipart/form-data'}
-      } else {
-        req.headers = {'Content-Type': 'application/json'}
+    // HEADERS Authorization
+    if (method.opts && method.opts.auth) {
+      if (!this._authentication.token && !params.token) throw Error('requires a bearer token, login first')
+      req.headers = Object.assign({
+        'Authorization': 'Bearer ' + (this._authentication.token || params.token)
+      }, this._settings.headers)
+    }
+
+    // HEADERS Api-Key
+    req.headers['Api-Key'] = this._settings.apikey
+
+    // JSON body
+    if (req.method !== 'GET') {
+      req.body = (method.body ? Object.assign({}, method.body) : {})
+      for (let k in params) {
+        if (k in req.body) req.body[k] = params[k]
       }
-
-      // HEADERS Authorization
-      if (req.opts && req.opts.auth) {
-        req.headers = Object.assign({
-          'Authorization': 'Bearer ' + this._authentication.token
-        }, req.headers)
+      for (let k in req.body) {
+        if (!req.body[k]) delete req.body[k]
       }
+      req.body = JSON.stringify(req.body)
+    }
 
-      // HEADERS Api-Key
-      req.headers['Api-Key'] = this._settings.apikey
-
-      // JSON body
-      if (req.method !== 'GET') {
-        req.body = (method.body ? Object.assign({}, method.body) : {})
-        for (let k in params) {
-          if (k in req.body) req.body[k] = params[k]
-        }
-        for (let k in req.body) {
-          if (!req.body[k]) delete req.body[k]
-        }
-        req.body = JSON.stringify(req.body)
-      }
-
-      // Actual call
-      return got(url, req)
-    }).then(response => JSON.parse(response.body))
+    // Actual call
+    console.log(url, req)
+    return got(url, req).then(response => JSON.parse(response.body))
   }
 }
