@@ -26,6 +26,8 @@ os.login({
 }).catch(console.error)
 ```
 
+* Alternatively, you can use the `os.user.login()` call, store the token yourself and pass it as an argument with every call requiring user authentication *
+
 ### Search for a subtitle
 ```js
 os.subtitle({

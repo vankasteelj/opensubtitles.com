@@ -1,7 +1,7 @@
 {
     "name": "opensubtitles.com",
     "version": "0.0.1-beta",
-    "description": "thetvdb.com api wrapper",
+    "description": "opensubtitles.com api wrapper",
     "author": {
         "name": "vankasteelj",
         "email": "vankasteelj@gmail.com"
