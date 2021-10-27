@@ -11,7 +11,9 @@ module.exports = class OS {
     this._settings = {
       apikey: settings.apikey,
       endpoint: 'https://api.opensubtitles.com',
-      headers: {'Content-Type': 'application/json'}
+      headers: {
+        'Content-Type': 'application/json'
+      }
     }
 
     this._construct()
@@ -85,15 +87,13 @@ module.exports = class OS {
     const url = this._parse(method, params)
     let req = {
       method: method.method,
-      headers: this._settings.headers
+      headers: Object.assign({}, this._settings.headers)
     }
 
     // HEADERS Authorization
     if (method.opts && method.opts.auth) {
       if (!this._authentication.token && !params.token) throw Error('requires a bearer token, login first')
-      req.headers = Object.assign({
-        'Authorization': 'Bearer ' + (this._authentication.token || params.token)
-      }, this._settings.headers)
+      req.headers['Authorization'] = 'Bearer ' + (this._authentication.token || params.token)
     }
 
     // HEADERS Api-Key
@@ -112,7 +112,6 @@ module.exports = class OS {
     }
 
     // Actual call
-    console.log(url, req)
     return got(url, req).then(response => JSON.parse(response.body))
   }
 }
