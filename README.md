@@ -1,6 +1,6 @@
 # Opensubtitles.com NodeJS API wrapper
 
-A simple nodejs wrapper for the [Opensubtitles.com](https://www.opensubtitles.com/) REST API. *Read https://opensubtitles.stoplight.io/docs/opensubtitles-api/ *
+A simple nodejs wrapper for the [Opensubtitles.com](https://www.opensubtitles.com/) REST API. *Read https://opensubtitles.stoplight.io/docs/opensubtitles-api/*
 
 ## Example usage
 ### Setup
@@ -26,7 +26,7 @@ os.login({
 }).catch(console.error)
 ```
 
-* Alternatively, you can use the `os.user.login()` call, store the token yourself and pass it as an argument with every call requiring user authentication *
+*Alternatively, you can use the `os.user.login()` call, store the token yourself and pass it as an argument with every call requiring user authentication*
 
 ### Search for a subtitle
 ```js
