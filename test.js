@@ -1,6 +1,8 @@
-const apikey = ''
-const username = ''
-const password = ''
+// to run, use `node test.js` 
+
+const apikey = '<FILL ME>'
+const username = '<FILL ME>'
+const password = '<FILL ME>'
 
 // Load module
 const got = require('got')
