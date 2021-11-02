@@ -12,7 +12,8 @@ module.exports = class OS {
       apikey: settings.apikey,
       endpoint: 'https://api.opensubtitles.com',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Accept': '*/*'
       }
     }
 
