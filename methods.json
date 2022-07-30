@@ -42,9 +42,6 @@
     "method": "GET"
   },
   "/download": {
-    "opts": {
-      "auth": true
-    },
     "url": "/api/v1/download",
     "method": "POST",
     "body": {
