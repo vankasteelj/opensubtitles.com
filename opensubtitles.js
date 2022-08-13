@@ -10,7 +10,7 @@ module.exports = class OS {
     this._authentication = {}
     this._settings = {
       apikey: settings.apikey,
-      endpoint: 'https://api.opensubtitles.com',
+      endpoint: settings.endpoint || 'https://api.opensubtitles.com/api/v1',
       headers: {
         'Content-Type': 'application/json',
         'Accept': '*/*'

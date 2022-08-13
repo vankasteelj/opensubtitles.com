@@ -5,9 +5,10 @@ const username = '<FILL ME>'
 const password = '<FILL ME>'
 
 // Load module
-const got = require('got')
-const os = new (require('./opensubtitles.js'))({apikey: apikey})
-
+const os = new (require('./opensubtitles.js'))({
+  apikey: apikey,
+  //endpoint: "https://stoplight.io/mocks/opensubtitles/opensubtitles-api/2781383" // mock server
+})
 // Log-in
 os.login({username: username,password: password}).then(response => {
   // search for 'steal this film 2006'
