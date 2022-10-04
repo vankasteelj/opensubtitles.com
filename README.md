@@ -30,7 +30,7 @@ os.login({
 
 ### Search for a subtitle
 ```js
-os.subtitle({
+os.subtitles({
   query: 'Steal this film 2006',
 }).then((response) => {
   /* response {
