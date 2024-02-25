@@ -9,7 +9,10 @@ A simple nodejs wrapper for the [Opensubtitles.com](https://www.opensubtitles.co
 ### Initialize
 ```js
 const OS = require('opensubtitles.com')
-const os = new OS({apikey: '<YOUR API KEY'>})
+const os = new OS({
+  apikey: '<YOUR API KEY>',
+  useragent: '<APP_NAME> v<APP_VERSION>'
+})
 ``` 
 
 ### Login

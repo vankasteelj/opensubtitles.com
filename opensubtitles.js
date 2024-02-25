@@ -13,7 +13,8 @@ module.exports = class OS {
       endpoint: settings.endpoint || 'https://api.opensubtitles.com/api/v1',
       headers: {
         'Content-Type': 'application/json',
-        'Accept': '*/*'
+        'Accept': '*/*',
+        'User-Agent': settings.useragent || 'opensubtitles.com' + ' v' + require('./package.json').version
       }
     }
 
